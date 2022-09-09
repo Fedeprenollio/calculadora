@@ -61,10 +61,7 @@ export const CalculatorState = ({ children }) => {
           result = parseFloat(currentValue) + parseFloat(memory);
 
           break;
-        case "Enter":
-          result = parseFloat(currentValue) + parseFloat(memory);
-
-          break;
+      
         case "-":
           result = parseFloat(memory) - parseFloat(currentValue);
 

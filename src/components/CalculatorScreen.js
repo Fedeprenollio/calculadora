@@ -5,7 +5,7 @@ export const CalculatorScreen = () => {
     const {memory, operation, currentValue, isDecimal} = useAppContext()
   return (
     <div className='calculatorScreen'>
-        <div>
+        <div className='memory'>
             Memoria: {memory} 
             <hr />
             Operación:{operation}
