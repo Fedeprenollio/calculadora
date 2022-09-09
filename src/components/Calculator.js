@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React  from "react";
 import { Button } from "./Button";
 import { CalculatorScreen } from "./CalculatorScreen";
-import { CalculatorState, useAppContext } from "./CalculatorState";
+import { CalculatorState} from "./CalculatorState";
 import "./estilos.css";
-import { KeyButton } from "./KeyButton";
 
 export const Calculator = () => {
 
@@ -11,7 +10,7 @@ export const Calculator = () => {
     <CalculatorState>
       <div className="calculatorContainer">
         <CalculatorScreen />
-        {/* <KeyButton  /> */}
+    
         <div className="container">
           <Button type="action" value="AC" />
           <Button type="operator" value="%" />

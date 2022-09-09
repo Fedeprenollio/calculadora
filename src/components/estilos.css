@@ -4,6 +4,7 @@
     padding: 1.5em;
     background-color: aliceblue;
     border-radius: .5rem;
+    word-wrap: break-word
 }
 
 .container{
@@ -53,6 +54,11 @@
 
 .focus{
     background-color:rgb(66, 65, 65);
+   
+}
+
+.focus:focus{
+    outline: none;
 }
 
 

@@ -3,8 +3,20 @@ import { useAppContext } from "./CalculatorState";
 
 export const Button = ({ type, value }) => {
   const { addNumber, addOperation, executeAction } = useAppContext();
-  const handleClickButton = () => {
+  const handleClickButton = (e) => {
+
+    const btn = document.getElementById(e.target.value);
+    
+    btn.classList.add("focus");
+    setTimeout(() => {
+      btn.classList.remove("focus");
+    
+
+    }, 150);
+
+    
     switch (type) {
+      
       case "number":
         addNumber(parseInt(value));
         break;
@@ -23,7 +35,6 @@ export const Button = ({ type, value }) => {
   const ref = useRef(null);
 
   const pressKey = (e) => {
-    console.log(e.key)
     if (e.key) {
       ref.current.value = e.key;
       let ID = e.key;
@@ -43,6 +54,8 @@ export const Button = ({ type, value }) => {
       btn.classList.add("focus");
       setTimeout(() => {
         btn.classList.remove("focus");
+      
+
       }, 150);
     }
 

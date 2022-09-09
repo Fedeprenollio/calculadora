@@ -44,7 +44,6 @@ export const CalculatorState = ({ children }) => {
   };
   const handleAddOperation = (op) => {
     if (operation) {
-      console.log("con op");
       handleGetResult();
       setOperation(op);
       // setCurrentValue(0);
