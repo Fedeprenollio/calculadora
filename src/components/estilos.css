@@ -1,6 +1,7 @@
 .calculatorContainer{
     width: 500px;
     margin: 100px auto;
+    padding: 1.5em;
     background-color: aliceblue;
     border-radius: .5rem;
 }
@@ -64,4 +65,8 @@
 
   .memory{
     text-align: end;
+  }
+
+  .calculatorScreen{
+    text-align: right;
   }

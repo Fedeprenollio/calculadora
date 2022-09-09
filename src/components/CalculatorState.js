@@ -18,9 +18,9 @@ export const CalculatorState = ({ children }) => {
   const [isReset, setIsReset] = useState(true);
   const [isDecimal, setIsDecimal] = useState(false);
   const [isNegative, setIsNegative] = useState(false);
+  const [lastOp, setLastOp] = useState([])
 
   const handleAddNumber = (value) => {
-
     if (isReset) {
       if (value === ".") {
         setIsDecimal(true);
@@ -44,11 +44,13 @@ export const CalculatorState = ({ children }) => {
   };
   const handleAddOperation = (op) => {
     if (operation) {
+      console.log("con op");
       handleGetResult();
       setOperation(op);
+      // setCurrentValue(0);
     } else {
       setOperation(op);
-      setMemory(currentValue);
+      currentValue !== 0 && setMemory(currentValue);
       setCurrentValue(0);
       setIsReset(true);
     }
@@ -58,6 +60,7 @@ export const CalculatorState = ({ children }) => {
       // setCurrentValue(-currentValue);
     }
   };
+
   const handleGetResult = () => {
     let result = 0;
     if (memory === null) {
@@ -67,7 +70,6 @@ export const CalculatorState = ({ children }) => {
       switch (operation) {
         case "+":
           result = parseFloat(currentValue) + parseFloat(memory);
-
           break;
 
         case "-":
@@ -90,7 +92,7 @@ export const CalculatorState = ({ children }) => {
         default:
           break;
       }
-      setCurrentValue(result);
+      setCurrentValue(0);
       setOperation(null);
       setMemory(result);
       setIsReset(true);
@@ -116,7 +118,11 @@ export const CalculatorState = ({ children }) => {
     setIsNegative(false);
   };
   const deleteLast = () => {
-    setCurrentValue(currentValue.toString().slice(0, -1));
+    if (currentValue.toString().length > 1) {
+      setCurrentValue(currentValue.toString().slice(0, -1));
+    } else {
+      setCurrentValue(0);
+    }
   };
   const changeSign = () => {
     setCurrentValue(currentValue * -1);
