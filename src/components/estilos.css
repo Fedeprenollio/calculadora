@@ -26,9 +26,9 @@
     border-radius: 0.5em;
 }
 
-.calculatorButton:hover{
+/* .calculatorButton:hover{
     background-color: rgb(66, 65, 65);
-}
+} */
 
 .calculatorCreen{
     display: flex;
@@ -47,3 +47,11 @@
 .focus{
     background-color:rgb(66, 65, 65);
 }
+
+
+@media (any-hover: hover) {
+    calculatorButton:hover {
+      background: mediumpurple;
+      color: #fff;
+    }
+  }
