@@ -158,6 +158,9 @@ export const CalculatorState = ({ children }) => {
       case "+/-":
         changeSign();
         break;
+      case "Shift":
+        changeSign();
+        break;
       case ".":
         convertToFloat();
         break;

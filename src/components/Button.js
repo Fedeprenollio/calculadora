@@ -23,11 +23,15 @@ export const Button = ({ type, value }) => {
   const ref = useRef(null);
 
   const pressKey = (e) => {
+    console.log(e.key)
     if (e.key) {
       ref.current.value = e.key;
       let ID = e.key;
       if (e.key === "Enter") {
         ID = "=";
+      }
+      if (e.key === "Shift") {
+        ID = "+/-";
       }
       if (e.key === "Escape") {
         ID = "AC";
@@ -56,6 +60,7 @@ export const Button = ({ type, value }) => {
       e.key === "AC" ||
       e.key === "Escape" ||
       e.key === "+/-" ||
+      e.key === "Shift" ||
       e.key === "<==" ||
       e.key === "Backspace" ||
       e.key === "." ||
