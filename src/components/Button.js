@@ -2,22 +2,28 @@ import React, { useEffect, useRef } from "react";
 import { useAppContext } from "./CalculatorState";
 
 export const Button = ({ type, value }) => {
-  const { addNumber, addOperation, executeAction } = useAppContext();
+  const { addNumber, addOperation, executeAction,setMemory } = useAppContext();
   const handleClickButton = () => {
-    switch (type) {
-      case "number":
-        addNumber(parseInt(value));
-        break;
-      case "operator":
-        addOperation(value);
-        break;
-      case "action":
-        executeAction(value);
-        break;
+ 
 
-      default:
-        break;
-    }
+      switch (type) {
+        case "number":
+          addNumber(parseInt(value));
+          break;
+        case "operator":
+          addOperation(value);
+          break;
+        case "action":
+          executeAction(value);
+          break;
+  
+        default:
+          break;
+      }
+    
+
+
+    
   };
 
 
@@ -28,7 +34,6 @@ const pressKey = (e)=>{
 if(e.key  ){
   ref.current.value = e.key
   let ID = e.key
-  console.log(ref.current.value)
 if (e.key === "Enter"){
   ID = "="
 }
@@ -39,7 +44,6 @@ if (e.key === "Backspace"){
   ID = "<=="
 }
 const btn = document.getElementById(ID)
-  console.log("hey", btn  )
   btn.classList.add("focus")
   setTimeout(()=>{
     

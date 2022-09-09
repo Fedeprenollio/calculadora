@@ -1,6 +1,8 @@
 .calculatorContainer{
     width: 500px;
     margin: 100px auto;
+    background-color: aliceblue;
+    border-radius: .5rem;
 }
 
 .container{
@@ -43,7 +45,9 @@
     font-size: 3rem;
     font-weight: bold;
     font-family: 'Orbitron', sans-serif;
-    background-color: rgb(163, 161, 161);    
+    background-color: rgb(163, 161, 161);   
+    margin:  1rem 0; 
+ 
 }
 
 .focus{

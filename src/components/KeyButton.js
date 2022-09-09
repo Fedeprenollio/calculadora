@@ -8,13 +8,11 @@ export const KeyButton = () => {
   let newValue;
   document.body.addEventListener("keydown", (e) => {
    
-    console.log("en el eventlisten", ref.current);
     ref.current.focus();
     
   });
   const mierda = (e) => {
     newValue = e.key;
-    console.log("en el mierda", e);
     if (!isNaN(Number(e.key))) {
       addNumber(e.key);
     } else if (
