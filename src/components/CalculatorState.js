@@ -12,119 +12,91 @@ const AppContext = createContext({
 });
 
 export const CalculatorState = ({ children }) => {
-  const [memory, setMemory] = useState(null);
+  const [memory, setMemory] = useState(["0"]);
   const [operation, setOperation] = useState(null);
-  const [currentValue, setCurrentValue] = useState(0);
-  const [isReset, setIsReset] = useState(true);
+  const [currentValue, setCurrentValue] = useState(["0"]);
+  // const [isReset, setIsReset] = useState(true);
   const [isDecimal, setIsDecimal] = useState(false);
-  const [isNegative, setIsNegative] = useState(false);
-  const [lastOp, setLastOp] = useState([])
-
+  // const [isNegative, setIsNegative] = useState(false);
+  // const [decimalCero, setDecimalCero] = useState("");
   const handleAddNumber = (value) => {
-    if (isReset) {
-      if (value === ".") {
-        setIsDecimal(true);
-      } else {
-        const point = isDecimal ? "." : "";
-        const newValue = currentValue.toString() + point + value.toString();
-        setCurrentValue(parseFloat(newValue));
-        setIsReset(false);
-        setIsDecimal(false);
-      }
-    } else {
-      if (value === ".") {
-        setIsDecimal(true);
-      } else {
-        const point = isDecimal ? "." : "";
-        const newValue = currentValue.toString() + point + value.toString();
-        setCurrentValue(parseFloat(newValue));
-        setIsDecimal(false);
-      }
-    }
+    setCurrentValue([...currentValue, value.toString()]);
   };
   const handleAddOperation = (op) => {
+    currentValue !== [0] && setMemory(currentValue);
     if (operation) {
       handleGetResult();
       setOperation(op);
-      // setCurrentValue(0);
     } else {
       setOperation(op);
-      currentValue !== 0 && setMemory(currentValue);
-      setCurrentValue(0);
-      setIsReset(true);
-    }
-
-    if (op === "-" && memory === null && currentValue === 0) {
-      setIsNegative(true);
-      // setCurrentValue(-currentValue);
+      currentValue !== [0] && setMemory(currentValue);
+      setCurrentValue(["0"]);
+      // setIsReset(true);
     }
   };
 
   const handleGetResult = () => {
     let result = 0;
-    if (memory === null) {
-      setMemory(0);
-    }
+
     if (currentValue && operation && memory) {
       switch (operation) {
         case "+":
-          result = parseFloat(currentValue) + parseFloat(memory);
+          result =
+            parseFloat(currentValue.join("")) + parseFloat(memory.join(""));
           break;
 
         case "-":
-          result = parseFloat(memory) - parseFloat(currentValue);
+          result =
+            parseFloat(memory.join("")) - parseFloat(currentValue.join(""));
 
           break;
         case "*":
-          result = parseFloat(currentValue) * parseFloat(memory);
+          result =
+            parseFloat(currentValue.join("")) * parseFloat(memory.join(""));
 
           break;
         case "/":
-          result = parseFloat(memory) / parseFloat(currentValue);
+          result =
+            parseFloat(memory.join("")) / parseFloat(currentValue.join(""));
 
           break;
         case "%":
-          result = (parseFloat(memory) / 100) * parseFloat(currentValue);
+          result =
+            (parseFloat(memory.join("")) / 100) *
+            parseFloat(currentValue.join(""));
 
           break;
 
         default:
           break;
       }
-      setCurrentValue(0);
+      setCurrentValue([result]);
       setOperation(null);
-      setMemory(result);
-      setIsReset(true);
+
+      setMemory([result]);
+      // setIsReset(true);
       setIsDecimal(false);
-    } else if (isNegative) {
-      let result = -currentValue;
-      setCurrentValue(0);
-      setOperation(null);
-      setMemory(result);
-      setIsReset(true);
-      setIsDecimal(false);
-      setIsNegative(false);
-      return;
     }
   };
 
   const clean = () => {
-    setCurrentValue(0);
+    setCurrentValue(["0"]);
     setOperation(null);
-    setMemory(null);
-    setIsReset(true);
+    setMemory(["0"]);
+    // setIsReset(true);
     setIsDecimal(false);
-    setIsNegative(false);
+    // setIsNegative(false);
   };
   const deleteLast = () => {
-    if (currentValue.toString().length > 1) {
-      setCurrentValue(currentValue.toString().slice(0, -1));
+    if (currentValue.length > 1) {
+      setCurrentValue(currentValue.slice(0, -1));
     } else {
-      setCurrentValue(0);
+      setCurrentValue(["0"]);
     }
   };
   const changeSign = () => {
-    setCurrentValue(currentValue * -1);
+    setCurrentValue([parseFloat(currentValue.join("")) * -1]);
+    console.log("cambiando el sgino", currentValue);
   };
   const convertToFloat = () => {
     if (currentValue.toString().indexOf(".") > 0) {
