@@ -3,7 +3,8 @@ import { useAppContext } from "./CalculatorState";
 
 export const CalculatorScreen = () => {
   const { memory, operation, currentValue } = useAppContext();
- console.log(memory)
+ console.log("currentValue",currentValue)
+ console.log("memory",memory)
   return (
     <div className="calculatorScreen">
       <h2 style={{textAlign: "center"}}>Calculadora Javascript </h2>

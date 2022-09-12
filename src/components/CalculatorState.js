@@ -14,7 +14,7 @@ const AppContext = createContext({
 export const CalculatorState = ({ children }) => {
   const [memory, setMemory] = useState(["0"]);
   const [operation, setOperation] = useState(null);
-  const [currentValue, setCurrentValue] = useState(["0"]);
+  const [currentValue, setCurrentValue] = useState([]);
   // const [isReset, setIsReset] = useState(true);
   const [isDecimal, setIsDecimal] = useState(false);
   // const [isNegative, setIsNegative] = useState(false);
@@ -23,22 +23,27 @@ export const CalculatorState = ({ children }) => {
     setCurrentValue([...currentValue, value.toString()]);
   };
   const handleAddOperation = (op) => {
-    currentValue !== [0] && setMemory(currentValue);
-    if (operation) {
-      handleGetResult();
-      setOperation(op);
-    } else {
-      setOperation(op);
-      currentValue !== [0] && setMemory(currentValue);
-      setCurrentValue(["0"]);
-      // setIsReset(true);
-    }
+    currentValue.length >0 && setMemory(currentValue);
+    handleGetResult();
+    setOperation(op);
+    setCurrentValue([]);
+    // if (operation) {
+    //   handleGetResult();
+    //   setOperation(op);
+    //   setCurrentValue(["0"]);
+    // } 
+    // else {
+    //   setOperation(op);
+    //   currentValue !== ["0"] && setMemory(currentValue);
+    //   setCurrentValue(["0"]);
+    //   // setIsReset(true);
+    // }
   };
 
   const handleGetResult = () => {
     let result = 0;
-
-    if (currentValue && operation && memory) {
+    console.log(currentValue, "setcuurrent")
+    if (currentValue.length>0 && operation && memory) {
       switch (operation) {
         case "+":
           result =
@@ -70,17 +75,17 @@ export const CalculatorState = ({ children }) => {
         default:
           break;
       }
+      setMemory([result]);
       setCurrentValue([result]);
       setOperation(null);
-
-      setMemory([result]);
+      
       // setIsReset(true);
       setIsDecimal(false);
     }
   };
 
   const clean = () => {
-    setCurrentValue(["0"]);
+    setCurrentValue([]);
     setOperation(null);
     setMemory(["0"]);
     // setIsReset(true);
@@ -91,7 +96,7 @@ export const CalculatorState = ({ children }) => {
     if (currentValue.length > 1) {
       setCurrentValue(currentValue.slice(0, -1));
     } else {
-      setCurrentValue(["0"]);
+      setCurrentValue([]);
     }
   };
   const changeSign = () => {
