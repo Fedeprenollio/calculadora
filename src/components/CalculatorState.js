@@ -76,7 +76,7 @@ export const CalculatorState = ({ children }) => {
           break;
       }
       setMemory([result]);
-      setCurrentValue([result]);
+      setCurrentValue([]);
       setOperation(null);
       
       // setIsReset(true);
